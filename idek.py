@@ -5,7 +5,7 @@ To switch to Azure AI Foundry, set USE_AZURE=true and populate Azure env vars.
 """
 
 import os
-from typing import Generator
+from typing import Generator, Optional
 
 from dotenv import load_dotenv
 from openai import OpenAI, AzureOpenAI
@@ -55,7 +55,7 @@ def _get_client():
     return OpenAI(api_key=OPENAI_API_KEY), OPENAI_MODEL
 
 
-def _get_embedding(text: str) -> list[float] | None:
+def _get_embedding(text: str):
     client, _ = _get_client()
     model = AZURE_OPENAI_EMBEDDING_DEPLOYMENT if USE_AZURE else "text-embedding-3-small"
     try:
